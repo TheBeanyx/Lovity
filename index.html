@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="hu" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loveity PLUS PREMIUM ULTRA S01</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0a0a0f',
+                        sidebar: '#12131a',
+                        cardbg: 'rgba(26, 27, 38, 0.7)',
+                        panel: '#161722',
+                        accent: '#a855f7',
+                        accentGlow: '#c084fc',
+                        cyanGlow: '#06b6d4'
+                    },
+                    boxShadow: {
+                        glow: '0 0 25px -5px rgba(168, 85, 247, 0.3)',
+                        glowCyan: '0 0 25px -5px rgba(6, 182, 212, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #1e1035 0%, #0a0a0f 60%);
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2b3d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+        .glass-panel {
+            background: rgba(22, 23, 34, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(30, 32, 48, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-100 h-screen flex overflow-hidden">
+    <div id="loginModal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center hidden transition-all duration-300">
+        <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-md w-11/12 border border-purple-500/30 shadow-glow text-center relative animate-bounce-short">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 mx-auto flex items-center justify-center text-2xl shadow-lg mb-4">
+                <i class="fa-solid fa-lock text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Prémium Hozzáférés</h3>
+            <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                A korábbi előzmények megtekintéséhez és több funkcióért jelentkezz be!
+            </p>
+            <button onclick="closeModal()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium py-3 px-6 rounded-xl transition shadow-md">
+                Rendben, értem
+            </button>
+        </div>
+    </div>
+
+    <aside id="sidebar" class="w-72 bg-sidebar/90 flex flex-col transition-all duration-300 border-r border-white/5 hidden md:flex backdrop-blur-xl">
+        <div class="p-5 border-b border-white/5 space-y-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-500 to-cyan-400 flex items-center justify-center shadow-glow">
+                    <i class="fa-solid fa-bolt text-white text-lg"></i>
+                </div>
+                <div>
+                    <div class="text-xs font-semibold tracking-wider text-purple-400 uppercase">LOVEITY</div>
+                    <div class="text-sm font-black tracking-tight text-white">PRO</div>
+                </div>
+            </div>
+
+            <button onclick="newChat()" class="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 hover:from-purple-600/30 hover:to-indigo-600/30 border border-purple-500/30 text-purple-200 text-sm font-medium py-3 px-4 rounded-xl w-full transition shadow-sm group">
+                <i class="fa-solid fa-plus text-purple-400 group-hover:rotate-90 transition-transform"></i>
+                <span>Új munkamenet</span>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-3 py-4 space-y-1.5">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-gray-500 px-3 py-1">Előzmények</div>
+            
+            <a href="#" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm text-gray-300 hover:bg-white/5 transition border border-transparent hover:border-white/5 group">
+                <i class="fa-solid fa-atom text-purple-400"></i>
+                <span class="truncate font-medium">7. fizika program.</span>
+            </a>
+            
+            <a href="#" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm text-gray-300 hover:bg-white/5 transition border border-transparent hover:border-white/5 group">
+                <i class="fa-solid fa-code text-cyan-400"></i>
+                <span class="truncate font-medium">weboldala fejlesztés</span>
+            </a>
+            
+            <a href="#" class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm text-gray-300 hover:bg-white/5 transition border border-transparent hover:border-white/5 group">
+                <i class="fa-solid fa-bug text-rose-400"></i>
+                <span class="truncate font-medium">creacodex hiba javítás</span>
+            </a>
+
+            <button onclick="openModal()" class="w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-sm text-purple-300 hover:text-white bg-purple-950/20 hover:bg-purple-900/30 border border-purple-800/30 transition mt-3 group">
+                <span class="flex items-center gap-2 font-medium">
+                    <i class="fa-solid fa-ellipsis-vertical text-purple-400"></i>
+                    Több előzmény...
+                </span>
+                <i class="fa-solid fa-lock text-xs text-purple-400 group-hover:scale-110 transition-transform"></i>
+            </button>
+        </div>
+
+        <div class="p-4 border-t border-white/5 glass-panel">
+            <div class="flex items-center justify-between text-xs text-gray-400 mb-2">
+                <span>Rendszer státusz:</span>
+                <span class="text-emerald-400 font-semibold flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Aktív
+                </span>
+            </div>
+            <div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-purple-500 to-cyan-400 h-full w-3/4"></div>
+            </div>
+        </div>
+    </aside>
+    <main class="flex-1 flex flex-col h-full bg-darkbg/95 relative">
+        <header class="border-b border-white/5 px-4 md:px-8 py-3 glass-panel z-20 flex flex-col md:flex-row items-center justify-between gap-3">
+            
+            <div class="flex items-center justify-between w-full md:w-auto">
+                <button onclick="toggleSidebar()" class="text-gray-400 hover:text-white md:hidden p-2">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <div class="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-purple-900/60 via-indigo-900/60 to-cyan-900/60 border border-purple-500/40 shadow-glow flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs text-purple-300 animate-pulse"></i>
+                        <span class="text-xs md:text-sm font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-cyan-200">
+                            Loveity PLUS PREMIUM ULTRA S01
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center bg-black/40 p-1 rounded-2xl border border-white/10 w-full md:w-auto justify-center">
+                <button onclick="switchTab('CHAT')" id="tab-CHAT" class="tab-btn flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>CHAT</span>
+                </button>
+                <button onclick="switchTab('KÓDOLÁS')" id="tab-KÓDOLÁS" class="tab-btn flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-code"></i>
+                    <span>KÓDOLÁS</span>
+                </button>
+                <button onclick="switchTab('KÉP')" id="tab-KÉP" class="tab-btn flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 text-gray-400 hover:text-white">
+                    <i class="fa-solid fa-image"></i>
+                    <span>KÉP</span>
+                </button>
+            </div>
+
+        </header>
+        <div id="chatContainer" class="flex-1 overflow-y-auto px-4 md:px-28 py-8 space-y-6">
+            <div class="flex items-start gap-4 animate-fade-in">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 flex-shrink-0 flex items-center justify-center text-white shadow-glow">
+                    <i class="fa-solid fa-microchip text-base"></i>
+                </div>
+                <div class="space-y-2 max-w-2xl w-full">
+                    <div class="font-bold text-xs uppercase tracking-wider text-purple-400">Loveity ULTRA S01 AI</div>
+                    <div class="glass-card p-5 rounded-3xl rounded-tl-sm text-gray-200 text-sm leading-relaxed border border-white/10 shadow-lg">
+                        Üdvözöllek! A <span class="text-purple-300 font-semibold">Loveity PLUS PREMIUM ULTRA S01</span> készen áll. Használd a felső füleket vagy írj közvetlenül a csevegőbe kódokért, képekért és válaszokért!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="p-4 md:px-28 bg-darkbg/80 border-t border-white/5 backdrop-blur-xl">
+            <div class="max-w-4xl mx-auto">
+                <form id="chatForm" onsubmit="handleSendMessage(event)" class="relative flex items-center">
+                    <textarea id="userInput" rows="1" placeholder="Írj egy üzenetet..." 
+                        class="w-full bg-panel/80 text-gray-100 placeholder-gray-500 text-sm rounded-2xl pl-5 pr-16 py-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 border border-white/10 resize-none max-h-36 shadow-2xl backdrop-blur-md"
+                        onkeydown="handleKeyDown(event)"></textarea>
+                    
+                    <button type="submit" id="sendBtn" class="absolute right-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white p-3 rounded-xl transition flex items-center justify-center shadow-glow">
+                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+                <div class="flex items-center justify-between text-[11px] text-gray-500 mt-2 px-2">
+                    <span>Mód: <strong id="currentModeLabel" class="text-purple-400">CHAT</strong></span>
+                    <span>Loveity ULTRA S01 Engine • 2026</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <script>
+        let currentTab = 'CHAT';
+        function switchTab(tabName) {
+            currentTab = tabName;
+            const tabs = ['CHAT', 'KÓDOLÁS', 'KÉP'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabName) {
+                    btn.className = "tab-btn flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md";
+                } else {
+                    btn.className = "tab-btn flex-1 md:flex-none px-5 py-2 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 text-gray-400 hover:text-white";
+                }
+            });
+            const input = document.getElementById('userInput');
+            const modeLabel = document.getElementById('currentModeLabel');
+            modeLabel.innerText = tabName;
+
+            if (tabName === 'CHAT') {
+                input.placeholder = "Írj egy üzenetet...";
+            } else if (tabName === 'KÓDOLÁS') {
+                input.placeholder = "Milyen kódot írjak neked?";
+            } else if (tabName === 'KÉP') {
+                input.placeholder = "Milyen képet rajzoljak?";
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+
+        function openModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        function newChat() {
+            const container = document.getElementById('chatContainer');
+            container.innerHTML = `
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 flex-shrink-0 flex items-center justify-center text-white shadow-glow">
+                        <i class="fa-solid fa-microchip text-base"></i>
+                    </div>
+                    <div class="space-y-2 max-w-2xl w-full">
+                        <div class="font-bold text-xs uppercase tracking-wider text-purple-400">Loveity ULTRA S01 AI</div>
+                        <div class="glass-card p-5 rounded-3xl rounded-tl-sm text-gray-200 text-sm leading-relaxed border border-white/10 shadow-lg">
+                            Új munkamenet elindítva. Tegyél fel egy kérdést, kérj kódot vagy képet!
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+            }
+        }
+
+        function drawCatCanvas(canvasId) {
+            setTimeout(() => {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                
+                const width = canvas.parentElement.clientWidth || 320;
+                const height = 220;
+                canvas.width = width;
+                canvas.height = height;
+
+                ctx.fillStyle = '#0f1016';
+                ctx.fillRect(0, 0, width, height);
+
+                ctx.strokeStyle = '#06b6d4';
+                ctx.fillStyle = 'rgba(6, 182, 212, 0.1)';
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                const cx = width / 2;
+                const cy = height / 2 + 10;
+
+  
+                ctx.beginPath();
+                ctx.arc(cx, cy, 55, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+
+ 
+                ctx.beginPath();
+                ctx.moveTo(cx - 45, cy - 35);
+                ctx.lineTo(cx - 75, cy - 90);
+                ctx.lineTo(cx - 20, cy - 60);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+  
+                ctx.beginPath();
+                ctx.moveTo(cx + 45, cy - 35);
+                ctx.lineTo(cx + 75, cy - 90);
+                ctx.lineTo(cx + 20, cy - 60);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(cx - 20, cy - 10, 6, 0, Math.PI * 2);
+                ctx.fillStyle = '#c084fc';
+                ctx.fill();
+                ctx.stroke();
+
+  
+                ctx.beginPath();
+                ctx.arc(cx + 20, cy - 10, 6, 0, Math.PI);
+                ctx.fillStyle = '#c084fc';
+                ctx.fill();
+                ctx.stroke();
+
+   
+                ctx.beginPath();
+                ctx.moveTo(cx - 5, cy + 5);
+                ctx.lineTo(cx + 5, cy + 5);
+                ctx.lineTo(cx, cy + 12);
+                ctx.closePath();
+                ctx.fillStyle = '#06b6d4';
+                ctx.fill();
+
+   
+                ctx.beginPath();
+                ctx.moveTo(cx, cy + 12);
+                ctx.lineTo(cx, cy + 22);
+                ctx.quadraticCurveTo(cx - 15, cy + 30, cx - 25, cy + 25);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(cx, cy + 22);
+                ctx.quadraticCurveTo(cx + 15, cy + 30, cx + 25, cy + 25);
+                ctx.stroke();
+
+                ctx.strokeStyle = 'rgba(6, 182, 212, 0.5)';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(cx - 25, cy + 15); ctx.lineTo(cx - 65, cy + 10);
+                ctx.moveTo(cx - 25, cy + 20); ctx.lineTo(cx - 60, cy + 25);
+                ctx.moveTo(cx + 25, cy + 15); ctx.lineTo(cx + 65, cy + 10);
+                ctx.moveTo(cx + 25, cy + 20); ctx.lineTo(cx + 60, cy + 25);
+                ctx.stroke();
+
+            }, 50);
+        }
+
+        function handleSendMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const container = document.getElementById('chatContainer');
+
+            const userMsgHTML = `
+                <div class="flex items-start gap-4 justify-end">
+                    <div class="space-y-2 max-w-2xl text-right">
+                        <div class="font-bold text-xs uppercase tracking-wider text-gray-400">Te</div>
+                        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 rounded-3xl rounded-tr-sm text-sm leading-relaxed shadow-lg inline-block text-left border border-purple-400/20">
+                            ${escapeHtml(text)}
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 rounded-2xl bg-gray-800 flex-shrink-0 flex items-center justify-center text-gray-300 text-sm font-bold border border-white/10 shadow-md">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', userMsgHTML);
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+
+
+            setTimeout(() => {
+                const lowerText = text.toLowerCase();
+                let aiResponseHTML = '';
+
+                const isCodeMode = currentTab === 'KÓDOLÁS' || lowerText.includes('kód') || lowerText.includes('program') || lowerText.includes('html');
+                const isImageMode = currentTab === 'KÉP' || lowerText.includes('kép') || lowerText.includes('rajz') || lowerText.includes('macska');
+
+                if (isCodeMode) {
+                    const htmlCodeContent = `<!DOCTYPE html>\n<html>\n<head>\n    <title>tanulj meg kódolni</title>\n</head>\n<body>\n    <h1>tanulj meg kódolni</h1>\n</body>\n</html>`;
+                    
+                    aiResponseHTML = `
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 flex-shrink-0 flex items-center justify-center text-white shadow-glow">
+                                <i class="fa-solid fa-microchip text-base"></i>
+                            </div>
+                            <div class="space-y-3 max-w-2xl w-full">
+                                <div class="font-bold text-xs uppercase tracking-wider text-purple-400">Loveity ULTRA S01 AI</div>
+                                <div class="glass-card p-5 rounded-3xl rounded-tl-sm text-gray-200 text-sm border border-white/10 shadow-lg space-y-3">
+                                    <div class="flex items-center justify-between text-xs text-purple-300 font-mono border-b border-white/10 pb-2">
+                                        <span><i class="fa-solid fa-code text-cyan-400 mr-2"></i>tanulj meg kódolni</span>
+                                        <span class="text-gray-500">HTML5</span>
+                                    </div>
+                                    <pre class="bg-black/60 p-4 rounded-2xl code-font text-emerald-400 text-sm overflow-x-auto border border-white/5"><code>${escapeHtml(htmlCodeContent)}</code></pre>
+                                </div>
+
+                                <div class="bg-amber-500/10 border border-amber-500/30 text-amber-300 px-4 py-3 rounded-2xl text-sm flex items-center gap-3 shadow-lg">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-400 text-lg"></i>
+                                    <span class="font-medium">A jobb válaszokért jelentkezz be!</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (isImageMode) {
+    
+                    const canvasId = 'catCanvas_' + Date.now();
+                    aiResponseHTML = `
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 flex-shrink-0 flex items-center justify-center text-white shadow-glow">
+                                <i class="fa-solid fa-microchip text-base"></i>
+                            </div>
+                            <div class="space-y-3 max-w-2xl w-full">
+                                <div class="font-bold text-xs uppercase tracking-wider text-purple-400">Loveity ULTRA S01 AI</div>
+                                <div class="glass-card p-5 rounded-3xl rounded-tl-sm text-gray-200 text-sm border border-white/10 shadow-lg space-y-3">
+                                    <div class="text-xs text-cyan-300 font-medium flex items-center gap-2">
+                                        <i class="fa-solid fa-paintbrush"></i> HTML5 Canvas Vonalrajz generálva:
+                                    </div>
+                                    <div class="bg-black/70 p-3 rounded-2xl flex justify-center items-center border border-purple-500/20 shadow-glowCyan overflow-hidden">
+                                        <canvas id="${canvasId}" class="w-full h-[220px] rounded-xl"></canvas>
+                                    </div>
+                                </div>
+                                
+          
+                                <div class="bg-amber-500/10 border border-amber-500/30 text-amber-300 px-4 py-3 rounded-2xl text-sm flex items-center gap-3 shadow-lg">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-400 text-lg"></i>
+                                    <span class="font-medium">A jobb válaszokért jelentkezz be!</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', aiResponseHTML);
+                    container.scrollTop = container.scrollHeight;
+                    drawCatCanvas(canvasId);
+                    return;
+                } else {
+  
+                    aiResponseHTML = `
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-cyan-500 flex-shrink-0 flex items-center justify-center text-white shadow-glow">
+                                <i class="fa-solid fa-microchip text-base"></i>
+                            </div>
+                            <div class="space-y-3 max-w-2xl w-full">
+                                <div class="font-bold text-xs uppercase tracking-wider text-purple-400">Loveity ULTRA S01 AI</div>
+                                <div class="glass-card p-5 rounded-3xl rounded-tl-sm text-gray-200 text-sm leading-relaxed border border-white/10 shadow-lg">
+                                    Hagyjál
+                                </div>
+                                
+                      
+                                <div class="bg-amber-500/10 border border-amber-500/30 text-amber-300 px-4 py-3 rounded-2xl text-sm flex items-center gap-3 shadow-lg">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-400 text-lg"></i>
+                                    <span class="font-medium">A jobb válaszokért jelentkezz be!</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                container.insertAdjacentHTML('beforeend', aiResponseHTML);
+                container.scrollTop = container.scrollHeight;
+            }, 500);
+        }
+
+  
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
